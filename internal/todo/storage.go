@@ -107,6 +107,28 @@ func MarkDone(id int) bool {
 	return false
 }
 
+func EditTask(id int, text string, priority int) bool {
+	tasks, err := readTasks()
+	if err != nil {
+		fmt.Println("Ошибка при чтении задач: ", err)
+		return false
+	}
+
+	for i, task := range tasks {
+		if task.ID == id {
+			tasks[i].Text = text
+			tasks[i].Priority = priority
+			if err := writeTasks(tasks); err != nil {
+				fmt.Println("Ошибка при обновлении задачи: ", err)
+				return false
+			}
+			return true
+		}
+	}
+
+	return false
+}
+
 func DeleteTask(id int) bool {
 	tasks, err := readTasks()
 	if err != nil {

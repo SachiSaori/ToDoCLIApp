@@ -18,6 +18,7 @@ func main() {
 		fmt.Println("2. Показать все задачи")
 		fmt.Println("3. Отметить задачу выполненной")
 		fmt.Println("4. Удалить задачу")
+		fmt.Println("5. Редактировать задачу")
 		fmt.Println("0. Выйти")
 		fmt.Println("> ")
 
@@ -52,6 +53,21 @@ func main() {
 			id, _ := strconv.Atoi(reader.Text())
 			if todo.DeleteTask(id) {
 				fmt.Println("Задача успешно удалена!")
+			} else {
+				fmt.Println("Задача не найдена!")
+			}
+		case "5":
+			fmt.Println("Введите ID задачи которую хотите изменить: ")
+			reader.Scan()
+			id, _ := strconv.Atoi(reader.Text())
+			fmt.Println("Введите новый текст задачи: ")
+			reader.Scan()
+			text := reader.Text()
+			fmt.Println("Введите новый приоритет: ")
+			reader.Scan()
+			priority, _ := strconv.Atoi(reader.Text())
+			if todo.EditTask(id, text, priority) {
+				fmt.Println("Задача успешно обновлена!")
 			} else {
 				fmt.Println("Задача не найдена!")
 			}
