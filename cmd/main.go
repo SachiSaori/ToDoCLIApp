@@ -16,7 +16,7 @@ func main() {
 		fmt.Println("--Меню--")
 		fmt.Println("1. Добавить задачу")
 		fmt.Println("2. Показать все задачи")
-		fmt.Println("3. Отметить задачу выполненной")
+		fmt.Println("3. Изменить статус задачи")
 		fmt.Println("4. Удалить задачу")
 		fmt.Println("5. Редактировать задачу")
 		fmt.Println("0. Выйти")
@@ -39,11 +39,11 @@ func main() {
 		case "2":
 			todo.ListTasks()
 		case "3":
-			fmt.Println("Введите ID задачи которую хотите пометить как выполненную: ")
+			fmt.Println("Введите ID задачи которой хотите изменить статус: ")
 			reader.Scan()
 			id, _ := strconv.Atoi(reader.Text())
-			if todo.MarkDone(id) {
-				fmt.Println("Задача отмечена как выполненная!")
+			if todo.StatusSwitch(id) {
+				fmt.Println("Статус задачи успешно сменён!")
 			} else {
 				fmt.Println("Задача не найдена!")
 			}

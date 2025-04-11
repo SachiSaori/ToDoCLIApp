@@ -86,7 +86,7 @@ func ListTasks() ([]Task, error) {
 	return readTasks()
 }
 
-func MarkDone(id int) bool {
+func StatusSwitch(id int) bool {
 	tasks, err := readTasks()
 	if err != nil {
 		fmt.Println("Ошибка при чтении задач: ", err)
@@ -95,7 +95,7 @@ func MarkDone(id int) bool {
 
 	for i, task := range tasks {
 		if task.ID == id {
-			tasks[i].Done = true
+			tasks[i].Done = !tasks[i].Done
 			if err := writeTasks(tasks); err != nil {
 				fmt.Println("Ошибка при обновлении задачи: ", err)
 				return false
